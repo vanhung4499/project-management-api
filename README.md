@@ -46,27 +46,40 @@ This is a project management backend api that allows users to create projects, a
 
 - Clone the project
 
-  ```sh
-  git clone https://github.com/vanhung4499/project-management-api
-  ```
+```sh
+git clone https://github.com/vanhung4499/project-management-api
+```
 
 - Install dependencies
 
-  ```sh
-  yarn install
-  ```
+```sh
+yarn install
+```
 
 - For the mongoDB, you can run local mongo or use the docker-compose to run the database instance
 
-  ```sh
-  docker-compose up -d mongo
-  ```
+```sh
+docker-compose up -d mongo
+```
+
+- Copy the `.env.example` file to `.env`
+
+```sh
+cp .env.example .env
+```
+
+- Run the migration to create the database schema
+
+```sh
+yarn run premigrate
+yarn run migrate
+```
 
 - Run the application
 
-  ```sh
-  yarn start
-  ```
+```sh
+yarn start
+```
 
 Open http://127.0.0.1:3000 in your browser.
 
