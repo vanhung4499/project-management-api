@@ -63,7 +63,7 @@ export class UserController {
         'application/json': {
           schema: getModelSchemaRef(UserWithPassword, {
             title: 'NewUser',
-            exclude: ['id'],
+            exclude: ['id', 'role'],
           }),
         },
       },
@@ -76,16 +76,27 @@ export class UserController {
     // valid email and password are required
     validateCredentials(_.pick(newUser, ['email', 'password']));
 
-    try {
-      return await this.userManagementService.createUser(newUser);
-    } catch (error) {
-      // MongoError 11000 duplicate key
-      if (error.code === 11000 && error.errmsg.includes('index: uniqueEmail')) {
-        throw new HttpErrors.Conflict('Email value is already taken');
-      } else {
-        throw error;
-      }
+    let foundUser = await this.userRepository.findOne({
+      where: {username: newUser.username},
+    });
+
+    if (foundUser) {
+      throw new HttpErrors.BadRequest(
+        `Username ${newUser.username} is already taken.`,
+      );
     }
+
+    foundUser = await this.userRepository.findOne({
+      where: {email: newUser.email},
+    });
+
+    if (foundUser) {
+      throw new HttpErrors.BadRequest(
+        `Email ${newUser.email} is already taken.`,
+      );
+    }
+
+    return await this.userManagementService.createUser(newUser);
   }
 
   @get('/users')

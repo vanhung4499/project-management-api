@@ -3,7 +3,6 @@ import {
   JWTAuthenticationComponent,
   SecuritySpecEnhancer,
   TokenServiceBindings,
-  UserCredentials,
   UserRepository,
 } from '@loopback/authentication-jwt';
 import {
@@ -24,6 +23,7 @@ import crypto from 'crypto';
 import path from 'path';
 import {PasswordHasherBindings, UserServiceBindings} from './keys';
 import {ErrorHandlerMiddlewareProvider} from './middlewares';
+import {UserCredentialsRepository} from './repositories';
 import {MySequence} from './sequence';
 import {
   BcryptHasher,
@@ -110,7 +110,9 @@ export class ProjectManagementApplication extends BootMixin(
 
     // 2. Make further changes. When creating predefined model instances,
     const userRepo = await this.getRepository(UserRepository);
-    const userCredentialsRepo = await this.getRepository(UserCredentials);
+    const userCredentialsRepo = await this.getRepository(
+      UserCredentialsRepository,
+    );
 
     // Create the default admin, user
     const users = [

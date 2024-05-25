@@ -4,18 +4,9 @@ import {Project} from './project.model';
 import {UserCredentials} from './user-credentials.model';
 
 @model({
+  datasource: 'mongo',
   settings: {
     strict: false,
-  },
-  indexes: {
-    uniqueEmail: {
-      keys: {email: 1},
-      options: {unique: true},
-    },
-    uniqueUsername: {
-      keys: {username: 1},
-      options: {unique: true},
-    },
   },
 })
 export class User extends Entity {
@@ -29,18 +20,23 @@ export class User extends Entity {
   @property({
     type: 'string',
     required: true,
+    index: {
+      unique: true,
+    },
   })
   username: string;
 
   @property({
     type: 'string',
     required: true,
+    index: {
+      unique: true,
+    },
   })
   email: string;
 
   @property({
     type: 'string',
-    id: true,
   })
   role: string;
 
