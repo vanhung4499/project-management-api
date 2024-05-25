@@ -78,43 +78,18 @@ I have already created a Dockerfile and docker-compose.yml file for you to run t
 docker-compose up -d
 ```
 
-### Build
-
-```sh
-yarn run build
-```
-
-To force a full build by cleaning up cached artifacts:
-
-```sh
-yarn run rebuild
-```
-
-### Fix code style and formatting issues
-
-```sh
-yarn run lint
-```
-
-To automatically fix such issues:
-
-```sh
-yarn run lint:fix
-```
-
 ### Other useful commands
 
+- `yarn run build`: Build the application
+- `yarn run rebuild`: Force a full build by cleaning up cached artifacts
+- `yarn run lint`: Lint the code
+- `yarn run lint:fix`: Lint the code and fix issues
 - `yarn run migrate`: Migrate database schemas for models
 - `yarn run openapi-spec`: Generate OpenAPI spec into a file
 - `yarn run docker:build`: Build a Docker image for this application
 - `yarn run docker:run`: Run this application inside a Docker container
 - `yarn run docker:compose`: Run this application and a MongoDB instance with Docker Compose
 
-### Tests
-
-```sh
-yarn test
-```
 
 ## API Documentation
 
