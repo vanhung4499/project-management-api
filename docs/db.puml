@@ -1,0 +1,62 @@
+@startuml db
+
+entity "User" {
+  + id : ObjectId
+  --
+  name : string
+  email : string
+  createdAt : datetime
+  updatedAt : datetime
+}
+
+entity "UserCredentials" {
+  + id : ObjectId
+  --
+  userId : ObjectId
+  password : string
+  createdAt : timestamp
+  updatedAt : timestamp
+}
+
+entity "Project" {
+  + id : ObjectId
+  --
+  name : string
+  description : string
+  createdAt : timestamp
+  updatedAt : timestamp
+}
+
+entity "ProjectMember" {
+  + id : ObjectId
+  --
+  userId : ObjectId
+  projectId : ObjectId
+  roleId : string
+  createdAt : timestamp
+  updatedAt : timestamp
+}
+
+entity "Task" {
+  + id : ObjectId
+  --
+  name : string
+  description : string
+  status : string
+  type : string
+  projectId : ObjectId
+  assignee : ObjectId
+  parentTaskId : ObjectId
+  createdAt : timestamp
+  updatedAt : timestamp
+}
+
+User ||..o{ ProjectMember : has
+User ||..o{ UserCredentials : hasOne
+
+Project ||..o{ ProjectMember : hasMany
+Project ||..o{ Task : hasMany
+User ||..o{ Task : "assigned to"
+Task ||..o{ Task : "has subtasks"
+
+@enduml
