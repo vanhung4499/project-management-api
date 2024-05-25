@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.network "forwarded_port", guest: 3000, host: 3000
 
-  config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+  # config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "2048"
@@ -38,7 +38,8 @@ Vagrant.configure("2") do |config|
     sudo npm install --global yarn
 
     # Run the API
-    cd /vagrant
+    git clone https://github.com/vanhung4499/project-management-api
+    cd project-management-api
     yarn install
     pm2 start yarn --name api -- start -- --port 3000
 
@@ -49,6 +50,7 @@ Vagrant.configure("2") do |config|
 	  | sudo tee /etc/apt/sources.list.d/ngrok.list \
 	  && sudo apt update \
 	  && sudo apt install ngrok
+
     # Auth ngrok
     ngrok config add-authtoken 2gxkSXve6LIwpwYSueFbPjP6qM7_7CRVmUs5fiXQnkUb2pgzD
 

@@ -13,6 +13,9 @@ This is a project management backend api that allows users to create projects, a
 - JWT for authentication
 - Docker & Docker Compose for containerization
 - VSCode for IDE
+- Vagrant for deployment
+- Ngrok for exposing the application to the internet
+- PM2 for process management
 
 ## Features
 
@@ -121,7 +124,17 @@ After running the application, you can access the API documentation at http://lo
 
 ## Deployment
 
-TODO
+For now, i can't deploy the application to the cloud because of my account. So, i deploy to an VM instance on my local machine.
+The deployment process is as follows:
+- Use Vagrant to create a VM instance
+- Use Vagrant Provisioning:
+  - Instal and setup mongodb, nodejs, pm2, ngrok
+  - Clone the project from github
+  - Install dependencies
+  - Run the application with pm2
+  - Expose the application to the internet with ngrok
+
+For more information, you can see the Vagrantfile in the root directory.
 
 ## License
 
