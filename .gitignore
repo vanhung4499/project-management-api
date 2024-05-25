@@ -68,3 +68,6 @@ typings/
 
 # Docker Compose data
 /data/
+
+# Vagrant environment
+/.vagrant
